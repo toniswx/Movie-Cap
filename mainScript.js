@@ -68,8 +68,7 @@ const app = {
    },
 
    getSelectedMovie : () =>{
-    let newUrl = `https://api.themoviedb.org/3/movie/${localStorage.getItem(`paramether`)}
-    ?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US `
+    let newUrl = `https://api.themoviedb.org/3/movie/${localStorage.getItem(`paramether`)}?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US `
     let req = new Request(newUrl,{
         method:"GET",
         mode:"cors"
@@ -87,16 +86,15 @@ const app = {
     
      const list_container = document.getElementById("list-show")   
      const ul = document.createElement("ul")
-     const li = document.createElement("li")
-     
-     console.log(post)
+   
+     console.log(post.results)
      post.results.forEach(element => {
-        li.innerHTML +=`<li data-id="${element.id}">
+        ul.innerHTML +=`<li data-id="${element.id}">
         <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
        width="200px" data-el="${element.id}" > </li>`
         
      });
-     ul.appendChild(li)
+  
      list_container.appendChild(ul)
      
 
@@ -111,7 +109,8 @@ const app = {
      post.results.forEach(element => {
         ul.innerHTML +=`<li data-li="${element.id}">
         <a href="page-two.html" target="_blank">
-       
+        <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
+       width="200px" data-el="${element.id}" >
        </a>
          </li>`    
             
@@ -135,10 +134,14 @@ const app = {
    const overview = document.querySelector(".overview_info")
    const background = document.querySelector(".background")
    const release = document.querySelector(".release_date_info")
-   
+   const nav = document.querySelector(".nav-balls") 
+
+
+
    let index = 0
    let length = movies.results.length
-   
+   let clicked = new CustomEvent('click');
+  
 
 
    title.innerHTML = movies.results[index].title
@@ -147,7 +150,11 @@ const app = {
    poster.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].poster_path}" >`
    background.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].backdrop_path}" >`
 
-  document.querySelector("#pro").addEventListener("click",()=>{
+
+
+
+
+  const next_btn = document.querySelector("#pro").addEventListener("click",()=>{
     index = index + 1
     if(index > length){
       index = 0
@@ -156,26 +163,42 @@ const app = {
     release.innerHTML = movies.results[index].release_date
     overview.innerHTML = movies.results[index].overview
     poster.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].poster_path}" >`
-
     background.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].backdrop_path}" >`
 
+
+
   })
-  document.querySelector("#ant").addEventListener("click",()=>{
-    index = index - 1
-    if(index < 0){
-      index = length     
-    }
-   title.innerHTML = movies.results[index].title
-   release.innerHTML = movies.results[index].release_date
 
-   overview.innerHTML = movies.results[index].overview
-   poster.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].poster_path}" >`
 
-   background.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].backdrop_path}" >`
-   
-  })  
-    
+  
+    const prev_btn = document.querySelector("#ant").addEventListener("click",()=>{
+      index = index - 1
+      if(index < 0){
+        index = length     
+      }
+     title.innerHTML = movies.results[index].title
+     release.innerHTML = movies.results[index].release_date
+  
+     overview.innerHTML = movies.results[index].overview
+     poster.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].poster_path}" >`
+  
+     background.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].backdrop_path}" >`
+     
+    })  
+
+
+
+
+
+
+
+
+
+
+
    }
+    
+   
    
 
 

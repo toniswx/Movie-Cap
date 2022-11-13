@@ -4,7 +4,7 @@ body,html{
     border: none;
     margin: 0;
     background: rgb(21,19,34);
-    background: linear-gradient(90deg, rgba(21,19,34,1) 0%, rgba(5,3,20,1) 0%, rgba(31,11,15,1) 100%);
+    background: linear-gradient(90deg, rgba(21,19,34,1) 0%, rgb(4, 2, 14) 0%, rgba(31,11,15,1) 100%);
 }
 /*style tag*/
 .style-tag{
@@ -76,6 +76,8 @@ body,html{
 .home{
     width:100vw;
     height: 80vh;
+    display: block;
+    margin-bottom: 19em;
 }
 .container_style{
     font-family: 'Barlow Condensed', sans-serif;
@@ -96,28 +98,36 @@ body,html{
     height: 100%;
 }
 .header_info{
+   
+    padding-inline-start: 1em;
+    border-left: 10px solid #E94560;
+    align-items: center;
     display: flex;
-    width: 100%;
+    width: 120%;
+   
+    
+    justify-content: space-between;
+    align-items: center;
 }
 
 .poster_style img{
     width: 60%;
     border-radius: 4px;
 }
+.general_info{
+    
+    flex-direction: column;
+display: flex;}
 .info_style{
     z-index: 2;
     color: white;
     width:50%;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     height: 100%;
    
 }
-.header_info p{
-    color: goldenrod;
-    width: 50%;
-}
+
 .nav_popular_movies{
     z-index: 100;
     width: 95%;
@@ -134,6 +144,7 @@ body,html{
 .info_style p{
     font-size: 18px;
     width: 40%;
+    
 }
 
 .nav_popular_movies i{
@@ -146,8 +157,10 @@ body,html{
 .nav_popular_movies i:hover{
     color: blueviolet;
 }
-
 .background img{
+    
+   filter: blur(2px );
+
     left: 0;
     opacity: .1;
      position: absolute;
@@ -155,4 +168,39 @@ body,html{
      width:100%;
      object-fit: cover;
      height: 110%
+}
+.treding{
+    top: 240;
+    right:300;
+    font-family: 'Barlow Condensed', sans-serif;
+    background-color: #FAD961;
+background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%);
+
+    padding: 10px;
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+    z-index: 1000;
+    font-size: 20px;
+    font-weight: bolder;
+    position:absolute;
+    color: rgb(24, 16, 16);
+}
+.see_more{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-color: #E94560;
+    font-size: 20px;
+    width: fit-content;
+    padding: 10px 60px;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
