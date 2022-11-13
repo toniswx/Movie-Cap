@@ -1,0 +1,158 @@
+body,html{
+    overflow-x: hidden;
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    background: rgb(21,19,34);
+    background: linear-gradient(90deg, rgba(21,19,34,1) 0%, rgba(5,3,20,1) 0%, rgba(31,11,15,1) 100%);
+}
+/*style tag*/
+.style-tag{
+    overflow-x: scroll;
+}
+.style-tag ul{
+    width: 100vw;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0;
+    display: flex;
+    flex-direction: row;
+}
+.style-tag li{
+    display: flex;
+    flex-direction: row;
+}
+
+/*SCROLL*/
+::-webkit-scrollbar-track{
+    border-radius: 100vw;
+    border: none;
+   }
+   ::-webkit-scrollbar{
+      
+       width: 5px;
+   }
+   ::-webkit-scrollbar-thumb{
+       background: #E94560;
+  }    
+
+
+/*NAV*/
+
+
+
+.bar{
+    font-family: 'Barlow Condensed', sans-serif;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.links a{
+    z-index: 10;
+    text-decoration: none;
+    font-size: 26px;
+    transition:  all .15s ease;
+    padding: 10px 10px;
+    color: rgb(243, 233, 233);
+    
+}
+.links a:hover{
+    color: #E94560;
+}
+.logo{
+    color: white;
+    font-size: 40px;
+}
+
+
+
+
+
+/*HOME BANNER   */
+
+.home{
+    width:100vw;
+    height: 80vh;
+}
+.container_style{
+    font-family: 'Barlow Condensed', sans-serif;
+
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.poster_style{
+    z-index: 2;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.header_info{
+    display: flex;
+    width: 100%;
+}
+
+.poster_style img{
+    width: 60%;
+    border-radius: 4px;
+}
+.info_style{
+    z-index: 2;
+    color: white;
+    width:50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+   
+}
+.header_info p{
+    color: goldenrod;
+    width: 50%;
+}
+.nav_popular_movies{
+    z-index: 100;
+    width: 95%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+
+}
+.title_movie{
+    width: 50%;
+
+    font-size: 70px;
+}
+.info_style p{
+    font-size: 18px;
+    width: 40%;
+}
+
+.nav_popular_movies i{
+    transition: all .15s ease;
+    font-size: 40px;
+    z-index: 10;
+    color: white;
+    padding: 20px;
+}
+.nav_popular_movies i:hover{
+    color: blueviolet;
+}
+
+.background img{
+    left: 0;
+    opacity: .1;
+     position: absolute;
+    top: 0;
+     width:100%;
+     object-fit: cover;
+     height: 110%
+}
