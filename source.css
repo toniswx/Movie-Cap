@@ -96,7 +96,7 @@ body,html{
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: space-around;
+    
     align-items: center;
 }
 .poster_style{
@@ -134,7 +134,7 @@ display: flex;
     padding-left: 5em;
     z-index: 2;
     color: white;
-    width:50%;
+    width:70%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -156,8 +156,7 @@ display: flex;
 }
 .info_style p{
     font-weight: 100;
-    font-size: 28px;
-    width: 70%;
+    font-size: 19px;    
     
 }
 
@@ -186,7 +185,7 @@ display: flex;
     right:300;
     font-family: 'Barlow Condensed', sans-serif;
 
-border-radius: 10px;
+    border-radius: 10px;
     padding: 20px 20px;
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
@@ -229,6 +228,7 @@ border-radius: 10px;
 .title-styletag{
     font-family: 'Barlow Condensed', sans-serif;
     width: 100%;
+ 
     color: white;
     padding-top: 4em;
     display: flex;
@@ -265,7 +265,7 @@ justify-content: space-around;
     color: #ff02f2;
 }
 .title-styletag h2{
-    
+    padding-top: 1em;
     padding-left: 10px;
     width: fit-content;
 
@@ -273,4 +273,46 @@ justify-content: space-around;
     font-size: 80px;
     margin-block-start: 0;
     margin-block-end: 0;
+}
+
+
+/**/
+
+
+.genre_rel{
+ 
+    display: flex;
+    
+}
+.pop_vote{
+    display: flex;
+}
+.general_info p{
+    font-size: 24px;
+    padding-right: 4em;
+}
+.pop_vote p{
+    color: gold;
+    padding-right: 4em;
+}
+.streaming_info{
+    
+    display: flex;
+    width: fit;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+
+}
+.streaming_info img{
+    padding: 20px;
+    object-fit: contain;
+   
+    
+}
+.overview_info{
+    font-size: 18px;
+    width: 70%;
 }

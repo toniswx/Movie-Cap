@@ -297,7 +297,52 @@ const app = {
    },
     
    showInfo : (info) =>{
-           console.log(info)
+    console.log(info)
+    const poster = document.querySelector(".poster")
+    const title = document.querySelector(".title_movie")
+    const overview = document.querySelector(".overview_info")
+    const background = document.querySelector(".background")
+    const release = document.querySelector(".release_date_info")
+    const genres = document.querySelector(".genres_info")
+    const tagline = document.querySelector(".tag_line").innerHTML = info.tagline
+    const streaming = document.querySelector(".streaming_info")
+    const pop = document.querySelector(".pop_info")
+    const vote = document.querySelector(".vote_info")
+    const label = document.querySelector(".straming")
+
+
+
+    //TAKE ALL GENRES 
+    info.genres.forEach(genre =>{
+      genres.innerHTML += genre.name + " "
+    })
+    
+    if(info.networks !== undefined){
+      info.networks.forEach(network =>{
+        label.innerHTML = "Streaming at"
+        streaming.innerHTML +=`<img src="https://image.tmdb.org/t/p/original/${network.logo_path}" width="100px" >`
+      })
+    }
+  
+  
+   
+   title.innerHTML = info.name
+   if(info.name === undefined){
+    title.innerHTML = info.title
+   }
+  release.innerHTML = info.first_air_date
+  if(info.first_air_date === undefined){
+    release.innerHTML = info.release_date
+  }
+  pop.innerHTML += info.popularity
+  vote.innerHTML += info.vote_average
+  
+
+   
+   overview.innerHTML = info.overview
+    poster.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${info.poster_path}" >`
+    background.innerHTML =`<img src="https://image.tmdb.org/t/p/original/${info.backdrop_path}" >`
+
    }
 
    
