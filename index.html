@@ -82,10 +82,15 @@
 <div class="container">
   
   <div class="title_most_popul title-styletag">
-     <h2>Trending movies today</h2>
+     <h2>Trending movies</h2>
+  <div class="genres-container">
+    <label for="genres">Genres</label>
+    <p>Terror,horror,action,drama</p>
+  </div>
+  
      <div class="nav_btn_movies">
-       <a href="#list-movie" class="esq" > <i class=" fa-solid fa-arrow-left"></i></a>
-        <a href="#list-movie" class="dir"> <i class=" fa-solid fa-arrow-right"></i></a>
+       <a href="#list-movie" class="esq" data-container="movie" >  <i class=" fa-solid fa-arrow-left"></i></a>
+        <a href="#list-movie" class="dir" data-container="movie"> <i class=" fa-solid fa-arrow-right"></i></a>
     </div>
 
   </div>
@@ -94,14 +99,43 @@
 
 
   </div>
+ 
   <div class="title_most_popul title-styletag">
+    <h2>Trending shows</h2>
+ <div class="genres-container">
+   <label for="genres">Genres</label>
+   <p>All genres</p>
+ </div>
+ 
+    <div class="nav_btn_movies">
+      <a href="#list-show" class="esq" data-container="show" > <i class=" fa-solid fa-arrow-left"></i></a>
+       <a href="#list-show" class="dir" data-container="show"> <i class=" fa-solid fa-arrow-right"></i></a>
+   </div>
 
-  </div>
+ </div>
   <div class="most_popular_show style-tag" id="list-show">
 
 
   </div>
+  <div class="title_most_popul title-styletag">
+    <h2>Top rated of all time</h2>
+ <div class="genres-container">
+   <label for="genres">Genres</label>
+   <p>All genres</p>
+   <p>Movies</p>
+ </div>
+ 
+    <div class="nav_btn_movies">
+      <a href="#list-discover" class="esq" data-container="discover" > <i class=" fa-solid fa-arrow-left"></i></a>
+       <a href="#list-discover" class="dir" data-container="discover"> <i class=" fa-solid fa-arrow-right"></i></a>
+   </div>
 
+ </div>
+
+  <div class="discover_movies style-tag" id="list-discover">
+
+
+  </div>
  
   
 </div>

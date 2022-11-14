@@ -1,10 +1,6 @@
 const app = {
 
 
-  
-    show_most_popular_URL :`
-    https://api.themoviedb.org/3/tv/popular?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&page=1
-    `,
    
     init: () =>{
           document.addEventListener('DOMContentLoaded',app.load)
@@ -22,6 +18,7 @@ const app = {
             case "page-1" :
                 app.getPopularMovies()
                 app.getMostPopularSeries()
+                app.getDiscoverData()
                 app.getLatest()
                 app.pagination()
                break
@@ -36,17 +33,49 @@ const app = {
     
     let page = 1
 
-    document.querySelector(".esq").addEventListener("click",()=>{
-      page = page - 1
+
+     document.querySelectorAll(".esq").forEach(btn =>{
+      btn.addEventListener("click",() =>{
+       page = page - 1
       
-      if(page === 0){return}
-      app.getPopularMovies(page)
-      console.log(page)
+      if(page < 1)
+       {return}
+      
+        if(btn.dataset.container === "show"){
+          app.getMostPopularSeries(page)
+        }
+        if(btn.dataset.container === "movie"){
+          app.getPopularMovies(page)
+        }
+        if(btn.dataset.container === "discover"){
+          app.getDiscoverData(page)
+        }
+        console.log(page)
+      })
     })
-    document.querySelector(".dir").addEventListener("click",()=>{
-      page = page + 1
-      console.log(page)
-      app.getPopularMovies(page)
+
+    
+     document.querySelectorAll(".dir").forEach(btn =>{
+      btn.addEventListener("click",() =>{
+       page = page + 1
+      
+      if(page > 10)
+       {return}
+      
+        if(btn.dataset.container === "show"){
+          app.getMostPopularSeries(page)
+        }
+        if(btn.dataset.container === "movie"){
+          app.getPopularMovies(page)
+        }
+        if(btn.dataset.container === "discover"){
+          app.getDiscoverData(page)
+        }
+        console.log(page)
+      
+      
+     
+      })
     })
 
    },
@@ -65,7 +94,6 @@ const app = {
    },
    getPopularMovies: (page) =>{
      let newUrl = `https://api.themoviedb.org/3/movie/popular?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&page=${page}`
-     console.log(newUrl)
      let req = new Request(newUrl,{
         method:"GET",
         mode :"cors"
@@ -75,8 +103,10 @@ const app = {
      .then(app.displayInfo)
       
    },
-   getMostPopularSeries : () =>{
-        let newUrl = app.show_most_popular_URL
+   getMostPopularSeries : (page) =>{
+        let newUrl = `
+        https://api.themoviedb.org/3/tv/popular?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&page=${page}
+        `
         let req = new Request(newUrl,{
             method:"GET",
             mode:"cors"
@@ -106,6 +136,11 @@ const app = {
      const list_container = document.getElementById("list-show")   
      const ul = document.createElement("ul")
    
+     list_container.innerHTML = ""
+
+
+
+
      console.log(post.results)
      post.results.forEach(element => {
         ul.innerHTML +=`<li data-id="${element.id}">
@@ -125,14 +160,6 @@ const app = {
      const list_container = document.getElementById("list-movie")
      list_container.innerHTML = ""
      const ul = document.createElement("ul")
-    
-
-    
-
-
-
-
-
      post.results.forEach(element => {
         ul.innerHTML +=`<li data-li="${element.id}">
         <a href="page-two.html" target="_blank">
@@ -140,16 +167,62 @@ const app = {
        width="200px" data-el="${element.id}" >
        </a>
          </li>`    
-            
-     });  
+             });  
+
+
      list_container.appendChild(ul)  
      const els = document.querySelectorAll("[data-li]")
      els.forEach(el =>{
         el.addEventListener("click",()=>{
          localStorage.setItem(`paramether`,`${el.dataset.li}`)
-        })
-     })
+        })})
+
    },
+ 
+   getDiscoverData : (page) =>{
+     
+    let newUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&page=${page}`
+
+    let req = new Request(newUrl,{
+      method:"GET",
+      mode:"cors"
+    })
+    fetch(req)
+    .then(resp => resp.json())
+    .then(app.showDiscoverData)
+
+   },
+
+   showDiscoverData : (movie) =>{
+     
+    console.log(movie)
+
+     const list_container = document.getElementById("list-discover")   
+     const ul = document.createElement("ul")
+     list_container.innerHTML = ""
+
+
+
+
+     movie.results.forEach(element => {
+        ul.innerHTML +=`<li data-id="${element.id}">
+        <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}" 
+       width="200px" data-el="${element.id}" > </li>`
+        
+     });
+  
+     list_container.appendChild(ul)
+     
+
+   },
+
+
+
+
+
+
+
+
 
 
 
@@ -179,7 +252,7 @@ const app = {
 
 
 
-  const next_btn = document.querySelector("#pro").addEventListener("click",()=>{
+   document.querySelector("#pro").addEventListener("click",()=>{
   
 
     index = index + 1
@@ -197,7 +270,7 @@ const app = {
 
 
   
-    const prev_btn = document.querySelector("#ant").addEventListener("click",()=>{
+    document.querySelector("#ant").addEventListener("click",()=>{
       index = index - 1
       if(index < 0){
         index = length     
