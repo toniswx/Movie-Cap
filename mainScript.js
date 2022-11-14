@@ -1,9 +1,7 @@
 const app = {
 
 
-    
-    movie_most_popular_URL : `https://api.themoviedb.org/3/movie/popular?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&page=1
-    `,
+  
     show_most_popular_URL :`
     https://api.themoviedb.org/3/tv/popular?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&page=1
     `,
@@ -25,6 +23,7 @@ const app = {
                 app.getPopularMovies()
                 app.getMostPopularSeries()
                 app.getLatest()
+                app.pagination()
                break
             case "page-2" : 
 
@@ -32,7 +31,26 @@ const app = {
                 break     
          }      
    },
- 
+  
+   pagination : () =>{
+    
+    let page = 1
+
+    document.querySelector(".esq").addEventListener("click",()=>{
+      page = page - 1
+      
+      if(page === 0){return}
+      app.getPopularMovies(page)
+      console.log(page)
+    })
+    document.querySelector(".dir").addEventListener("click",()=>{
+      page = page + 1
+      console.log(page)
+      app.getPopularMovies(page)
+    })
+
+   },
+
    getLatest : () =>{
     let newUrl = `https://api.themoviedb.org/3/movie/popular?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&page=1`
 
@@ -45,8 +63,9 @@ const app = {
     .then(app.latest)
 
    },
-   getPopularMovies: () =>{
-     let newUrl = app.movie_most_popular_URL
+   getPopularMovies: (page) =>{
+     let newUrl = `https://api.themoviedb.org/3/movie/popular?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&page=${page}`
+     console.log(newUrl)
      let req = new Request(newUrl,{
         method:"GET",
         mode :"cors"
@@ -83,7 +102,7 @@ const app = {
 
 
    getSexInfo: (post) =>{   
-    
+    //SHOWS
      const list_container = document.getElementById("list-show")   
      const ul = document.createElement("ul")
    
@@ -102,9 +121,17 @@ const app = {
 
    displayInfo: (post)=>{
 
+
      const list_container = document.getElementById("list-movie")
+     list_container.innerHTML = ""
      const ul = document.createElement("ul")
     
+
+    
+
+
+
+
 
      post.results.forEach(element => {
         ul.innerHTML +=`<li data-li="${element.id}">
@@ -134,13 +161,11 @@ const app = {
    const overview = document.querySelector(".overview_info")
    const background = document.querySelector(".background")
    const release = document.querySelector(".release_date_info")
-   const nav = document.querySelector(".nav-balls") 
 
 
 
    let index = 0
    let length = movies.results.length
-   let clicked = new CustomEvent('click');
   
 
 
@@ -155,6 +180,8 @@ const app = {
 
 
   const next_btn = document.querySelector("#pro").addEventListener("click",()=>{
+  
+
     index = index + 1
     if(index > length){
       index = 0
@@ -164,7 +191,6 @@ const app = {
     overview.innerHTML = movies.results[index].overview
     poster.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].poster_path}" >`
     background.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].backdrop_path}" >`
-
 
 
   })
@@ -185,16 +211,6 @@ const app = {
      background.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].backdrop_path}" >`
      
     })  
-
-
-
-
-
-
-
-
-
-
 
    }
     
