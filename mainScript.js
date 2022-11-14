@@ -117,7 +117,7 @@ const app = {
    },
 
    getSelectedMovie : () =>{
-    let newUrl = `https://api.themoviedb.org/3/movie/${localStorage.getItem(`paramether`)}?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US `
+    let newUrl = `https://api.themoviedb.org/3/${localStorage.getItem("type")}/${localStorage.getItem(`id`)}?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US `
     let req = new Request(newUrl,{
         method:"GET",
         mode:"cors"
@@ -143,13 +143,24 @@ const app = {
 
      console.log(post.results)
      post.results.forEach(element => {
-        ul.innerHTML +=`<li data-id="${element.id}">
+        ul.innerHTML +=`<li data-id="${element.id}" data-type="tv">
+        <a href="page-two.html" target="_blank">
         <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
-       width="200px" data-el="${element.id}" > </li>`
+       width="200px" data-el="${element.id}" >
+       </a>
+         </li>`
+        
         
      });
   
      list_container.appendChild(ul)
+     const els = document.querySelectorAll("[data-id]")
+     els.forEach(el =>{
+        el.addEventListener("click",()=>{
+         localStorage.setItem(`id`,`${el.dataset.id}`)
+         localStorage.setItem(`type`,`${el.dataset.type}`)
+         
+        })})
      
 
    },
@@ -161,7 +172,7 @@ const app = {
      list_container.innerHTML = ""
      const ul = document.createElement("ul")
      post.results.forEach(element => {
-        ul.innerHTML +=`<li data-li="${element.id}">
+        ul.innerHTML +=`<li data-id="${element.id}" data-type="movie">
         <a href="page-two.html" target="_blank">
         <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
        width="200px" data-el="${element.id}" >
@@ -174,7 +185,8 @@ const app = {
      const els = document.querySelectorAll("[data-li]")
      els.forEach(el =>{
         el.addEventListener("click",()=>{
-         localStorage.setItem(`paramether`,`${el.dataset.li}`)
+          localStorage.setItem(`id`,`${el.dataset.id}`)
+          localStorage.setItem(`type`,`${el.dataset.type}`)
         })})
 
    },
@@ -205,27 +217,24 @@ const app = {
 
 
      movie.results.forEach(element => {
-        ul.innerHTML +=`<li data-id="${element.id}">
-        <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}" 
-       width="200px" data-el="${element.id}" > </li>`
+        ul.innerHTML +=`<li data-id="${element.id}" data-type="movie">
+        <a href="page-two.html" target="_blank">
+        <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
+       width="200px" data-el="${element.id}" >
+       </a>
+         </li>`
         
      });
   
      list_container.appendChild(ul)
-     
+     const els = document.querySelectorAll("[data-li]")
+     els.forEach(el =>{
+        el.addEventListener("click",()=>{
+          localStorage.setItem(`id`,`${el.dataset.id}`)
+          localStorage.setItem(`type`,`${el.dataset.type}`)
+        })})
 
    },
-
-
-
-
-
-
-
-
-
-
-
 
 
    latest : (movies) =>{
@@ -285,8 +294,12 @@ const app = {
      
     })  
 
-   }
+   },
     
+   showInfo : (info) =>{
+           console.log(info)
+   }
+
    
    
 
