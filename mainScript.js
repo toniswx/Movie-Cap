@@ -252,8 +252,9 @@ const app = {
 
     
     const list_container = document.getElementById("list-discover")
+   
+    const ul = document.createElement("ul") 
     list_container.innerHTML = ""
-    const ul = document.createElement("ul")
     movie.results.forEach(element => {
        ul.innerHTML +=`<li data-id="${element.id}" data-type="movie">
        <a href="page-two.html" target="_blank">
@@ -265,7 +266,7 @@ const app = {
 
 
     list_container.appendChild(ul)  
-    const els = document.querySelectorAll("[data-li]")
+    const els = document.querySelectorAll("[data-id]")
     els.forEach(el =>{
        el.addEventListener("click",()=>{
          localStorage.setItem(`id`,`${el.dataset.id}`)
