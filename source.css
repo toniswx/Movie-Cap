@@ -20,10 +20,12 @@ body,html{
     margin-inline-end: 0px;
     padding-inline-start: 0;
     display: flex;
+    list-style: none;
     flex-direction: row;
 }
 .style-tag li{
     display: flex;
+    list-style: none;
     flex-direction: row;
 }
 
@@ -57,13 +59,31 @@ body,html{
     z-index:300;
    
 }
-.links a{
+.links input {
+    outline: none;
+    border: none;
+    width: 400px;
+    padding: 14px 50px;
+    border-radius: 10px 0 0 10px;
+    inset: none;
+}
+.links select{
+    margin-left: -4px;
+    outline: none;
+    border: none;
+    color: white;
+    background-color:#E94560 ;
+    padding: 13px 20px;
+    border-radius: 0 10px 10px 0
+}
+.links option{
 
-    text-decoration: none;
-    font-size: 26px;
-    transition:  all .15s ease;
-    padding: 10px 10px;
-    color: rgb(243, 233, 233); 
+   
+    color: white;
+    font-size: 15px;
+}
+.links optgroup{
+    padding-inline-start: 20px;
 }
 .links a:hover{
     z-index:300;
@@ -399,3 +419,33 @@ justify-content: space-around;
 
 
 
+
+
+
+
+.search-page{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    z-index: 10000;
+    width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    background-color: white;
+    top: 150;
+}
+li::marker {
+    unicode-bidi: none;
+    font-variant-numeric: none;
+    text-transform: none;
+    text-indent: 0px ;
+    text-align: start ;
+    text-align-last: end ;
+}
+.teste li{
+
+    marker: none;
+    list-style: none;
+}

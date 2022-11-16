@@ -9,7 +9,7 @@
         </style>
         <link rel="stylesheet" href="source.css">
 </head>
-<body id="page-1">
+<body id="page-1" class="keyboard">
 
 
 <nav>
@@ -17,9 +17,15 @@
         <div class="logo">
             <h2>MOVIE<span>CAP</span></h2>
         </div>
-            <div class="links">
-            <a href="page-one.html" target="_blank">Filmes</a>
-            <a href="page-two.html" target="_blank">Series</a>
+            <div class="links"> 
+
+              <input type="search" placeholder="What are you looking for?" id="searinput">
+              <select name="type" id="select">    
+                <option value="movie">Movies</option>
+                <option value="tv">Shows</option>
+                
+              </select>
+              
            
 
             </div>
@@ -138,10 +144,15 @@
 
 
   </div>
- 
-  
 </div>
 
+
+<div class="search-page">
+
+
+
+  
+</div>
         <script src="mainScript.js"></script>
 </body>
 </html>
