@@ -25,6 +25,9 @@ const app = {
             case "page-2" : 
 
            app.getSelectedMovie()
+           app.getCredits()
+           app.getImages()
+           app.getSimilarMovies()
                 break     
          }      
    },
@@ -60,7 +63,7 @@ const app = {
        page = page + 1
       
       if(page > 10)
-       {return}
+       {page = 1 }
       
         if(btn.dataset.container === "show"){
           app.getMostPopularSeries(page)
@@ -117,7 +120,7 @@ const app = {
    },
 
    getSelectedMovie : () =>{
-    let newUrl = `https://api.themoviedb.org/3/${localStorage.getItem("type")}/${localStorage.getItem(`id`)}?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US `
+    let newUrl = `https://api.themoviedb.org/3/${localStorage.getItem("type")}/${localStorage.getItem("id")}?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US `
     let req = new Request(newUrl,{
         method:"GET",
         mode:"cors"
@@ -128,9 +131,34 @@ const app = {
     .then(app.showInfo)
 },
 
+   getCredits : () =>{
+  
+   let url = ` https://api.themoviedb.org/3/${localStorage.getItem("type")}/${localStorage.getItem("id")}/credits?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US`
+   let req = new Request(url,{
+    method:"GET",
+    mode:"cors"
+   })
+   fetch(req)
+   .then(resp => resp.json())
+   .then(app.creditsData)
+}
+
+,
+   getImages : () =>{
+    let url = `https://api.themoviedb.org/3/${localStorage.getItem("type")}/${localStorage.getItem("id")}/videos?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US
+
+    `
+      let req = new Request(url,{
+      method:"GET",
+      mode:"cors"
+      })
+      fetch(req)
+     .then(resp => resp.json())
+     .then(app.imagesData)
 
 
-
+    }
+    ,
    getSexInfo: (post) =>{   
     //SHOWS
      const list_container = document.getElementById("list-show")   
@@ -140,8 +168,6 @@ const app = {
 
 
 
-
-     console.log(post.results)
      post.results.forEach(element => {
         ul.innerHTML +=`<li data-id="${element.id}" data-type="tv">
         <a href="page-two.html" target="_blank">
@@ -164,7 +190,20 @@ const app = {
      
 
    },
+   getSimilarMovies : () =>{
+      
+    let url = `https://api.themoviedb.org/3/${localStorage.getItem("type")}/${localStorage.getItem("id")}/similar?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&page=1`
+    let req = new Request(url,{
+      method:"GET",
+      mode:"cors"
+    })
+    fetch(req)
+    .then(resp => resp.json())
+    .then(app.similar)
 
+ 
+
+   },
    displayInfo: (post)=>{
 
 
@@ -205,34 +244,34 @@ const app = {
 
    },
 
+
+
+
    showDiscoverData : (movie) =>{
      
-    console.log(movie)
 
-     const list_container = document.getElementById("list-discover")   
-     const ul = document.createElement("ul")
-     list_container.innerHTML = ""
+    
+    const list_container = document.getElementById("list-discover")
+    list_container.innerHTML = ""
+    const ul = document.createElement("ul")
+    movie.results.forEach(element => {
+       ul.innerHTML +=`<li data-id="${element.id}" data-type="movie">
+       <a href="page-two.html" target="_blank">
+       <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
+      width="200px" data-el="${element.id}" >
+      </a>
+        </li>`    
+            });  
 
 
+    list_container.appendChild(ul)  
+    const els = document.querySelectorAll("[data-li]")
+    els.forEach(el =>{
+       el.addEventListener("click",()=>{
+         localStorage.setItem(`id`,`${el.dataset.id}`)
+         localStorage.setItem(`type`,`${el.dataset.type}`)
+       })})
 
-
-     movie.results.forEach(element => {
-        ul.innerHTML +=`<li data-id="${element.id}" data-type="movie">
-        <a href="page-two.html" target="_blank">
-        <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
-       width="200px" data-el="${element.id}" >
-       </a>
-         </li>`
-        
-     });
-  
-     list_container.appendChild(ul)
-     const els = document.querySelectorAll("[data-li]")
-     els.forEach(el =>{
-        el.addEventListener("click",()=>{
-          localStorage.setItem(`id`,`${el.dataset.id}`)
-          localStorage.setItem(`type`,`${el.dataset.type}`)
-        })})
 
    },
 
@@ -304,7 +343,6 @@ const app = {
     const background = document.querySelector(".background")
     const release = document.querySelector(".release_date_info")
     const genres = document.querySelector(".genres_info")
-    const tagline = document.querySelector(".tag_line").innerHTML = info.tagline
     const streaming = document.querySelector(".streaming_info")
     const pop = document.querySelector(".pop_info")
     const vote = document.querySelector(".vote_info")
@@ -324,8 +362,6 @@ const app = {
       })
     }
   
-  
-   
    title.innerHTML = info.name
    if(info.name === undefined){
     title.innerHTML = info.title
@@ -334,21 +370,86 @@ const app = {
   if(info.first_air_date === undefined){
     release.innerHTML = info.release_date
   }
-  pop.innerHTML += info.popularity
-  vote.innerHTML += info.vote_average
-  
 
-   
-   overview.innerHTML = info.overview
+
+    pop.innerHTML += info.popularity
+    vote.innerHTML += info.vote_average
+    overview.innerHTML = info.overview
     poster.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${info.poster_path}" >`
     background.innerHTML =`<img src="https://image.tmdb.org/t/p/original/${info.backdrop_path}" >`
 
    }
+   ,
+   creditsData : (movie) =>{
+ 
+    const cast_container = document.querySelector(".cast")
+     
+      movie.cast.forEach(per =>{
+      if(per.profile_path === null){
+        return
+      }
+      else{
+         cast_container.innerHTML +=`
+
+        <div>
+        <img src="https://image.tmdb.org/t/p/original/${per.profile_path}" >
+        <p>${per.name}</p>
+        <span>${per.character}</span>
+        </div>
+      `
+      }
+     
+
+    })
+
+
+
+   },
+
+   imagesData : (images)=> {
+   
+    if(images.results.length === 0){
+      document.querySelector(".trailer_title").innerHTML = ""
+      
+    }
+    else{
+       images.results.forEach(video => {
+      document.querySelector(".trailer").innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${video.key}?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+    });
+    }
+     
+   
+   },
+   similar : (similar) =>{
+     console.log(similar)
+     const list_container = document.getElementById("list-similar")
+     list_container.innerHTML = ""
+     const ul = document.createElement("ul")
+     similar.results.forEach(element => {
+        ul.innerHTML +=`<li data-id="${element.id}" data-type="movie"  data-el="${element.id}">
+        <a href="page-two.html">
+        <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
+       width="200px" >
+       </a>
+         </li>`    
+             });  
+
+
+     list_container.appendChild(ul)  
+     const els = document.querySelectorAll("[data-id]")
+     els.forEach(el =>{
+        el.addEventListener("click",()=>{
+          localStorage.setItem(`id`,`${el.dataset.el}`)
+          localStorage.setItem(`type`,`${el.dataset.type}`)
+         
+        })})
+
+  }
+      
 
    
+
    
-
-
 
 }
 

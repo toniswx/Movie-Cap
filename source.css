@@ -121,7 +121,7 @@ body,html{
 }
 
 .poster_style img{
-    width: 60%;
+    width: 70%;
     box-shadow: -54px 13px 47px -3px rgba(0, 0, 0, 0.26),inset -44px -87px 69px 23px rgba(0, 0, 0, 0.699);
     border-radius: 4px;
 }
@@ -292,7 +292,7 @@ justify-content: space-around;
     padding-right: 4em;
 }
 .pop_vote p{
-    color: gold;
+    
     padding-right: 4em;
 }
 .streaming_info{
@@ -316,3 +316,86 @@ justify-content: space-around;
     font-size: 18px;
     width: 70%;
 }
+
+
+.container_1{
+    font-family: 'Barlow Condensed', sans-serif;
+    justify-content: space-around;
+    display: flex;
+    width:100vw;
+   
+    margin-top: -10em;
+}
+.container_1 label{
+    color: white;
+    font-size: 70px;
+    width: fit-content
+
+}
+.container_2{
+    display: flex;
+    justify-content: space-around;   
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    
+}
+.container_2_cast{
+    padding-left: 1em;
+    width: 50%;
+   
+    display: flex;
+    flex-direction: column;
+}
+.cast{
+    text-align: center;
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+  
+    font-weight: bolder;
+}
+.cast img{
+    width: 250px;
+}
+.cast p{
+    font-size: 20px;
+    color: #af760c;
+}
+.cast span{
+    font-size: 20px;
+    color: white;
+
+  
+}
+
+
+
+
+
+
+
+.container_2_trailer{
+    padding-left: 1em;
+    width: 40%;
+    height: 100%;
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+.trailer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    overflow-x: scroll;
+}
+.trailer iframe{
+    padding-inline-end: 10em;
+}
+
+
+
+
