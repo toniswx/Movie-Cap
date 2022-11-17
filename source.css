@@ -519,7 +519,7 @@ grid-row-gap: 0px;
 .background img{
     
     height: 160vh;
-    
+    width: 100%;
     object-fit: cover;
 }
 .links{
@@ -608,6 +608,11 @@ color: white;}
 .home-btn{
     padding: 20px;
 }
-
+body,html{
+   
+    overflow-x: hidden;
+ 
+    
+}
 
 }
