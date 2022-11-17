@@ -375,6 +375,7 @@ justify-content: space-around;
 }
 .cast img{
     width: 250px;
+    object-fit: cover;
 }
 .cast p{
     font-size: 20px;

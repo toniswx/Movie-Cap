@@ -573,17 +573,31 @@ const app = {
    
    },
    similar : (similar) =>{
+      
+   
+
      console.log(similar)
      const list_container = document.getElementById("list-similar")
      list_container.innerHTML = ""
      const ul = document.createElement("ul")
      similar.results.forEach(element => {
-        ul.innerHTML +=`<li data-id="${element.id}" data-type="movie"  data-el="${element.id}">
+      if(element.name !== null){
+        ul.innerHTML +=`<li data-id="${element.id}" data-type="tv"  data-el="${element.id}">
         <a href="page-two.html">
         <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
        width="200px" >
        </a>
          </li>`    
+      }
+      else{
+        ul.innerHTML +=`<li data-id="${element.id}" data-type="movie"  data-el="${element.id}">
+        <a href="page-two.html">
+        <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
+       width="200px" >
+       </a>
+         </li>` 
+      }
+           
              });  
 
 
