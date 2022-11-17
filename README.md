@@ -2,7 +2,8 @@
 
 ## Overview
 
-MovieCap is an app which use an api to satisfy the user request.
+MovieCap is an app about movies and tv shows,the app have a big data-base with almost every movie and tv show.
+You can search movies or tv shows,you can see the trending movies.
 
 ![Alt text](desktop.PNG "a title")
 
