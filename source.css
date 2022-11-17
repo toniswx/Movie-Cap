@@ -198,7 +198,7 @@ display: flex;
      object-fit: cover;
 }
 .treding{
-    top: 190;
+    top: 150;
     right:300;
     font-family: 'Barlow Condensed', sans-serif;
 
@@ -483,3 +483,131 @@ grid-row-gap: 0px;
 
 
 
+
+@media only screen and (max-width: 1185px){
+  .bar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 25em;
+    margin-bottom: 1em;
+    
+  }
+  
+ .container_style{
+    flex-direction: column;
+    justify-content: center;
+  
+ }
+ .home{
+    height: 94vh;
+ }
+ .poster{
+    width: 80%;
+ }
+ .info_style{
+    padding: 0;
+ }
+ .title_movie{
+    font-size: 25px;
+ }
+ .general_info p{
+    width: 100%;
+     font-size: 17px;
+ }
+.background img{
+    
+    height: 160vh;
+    
+    object-fit: cover;
+}
+.links{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+}
+.links input{
+    width: 40%;
+}
+.treding{
+    display: none;
+}
+#ant i{
+    margin-left: -1em;
+    font-size: 15px;
+    padding: 200px 27px;
+    
+    color: white;}
+#pro i{
+    margin-right: -1em;
+    font-size: 15px;
+    padding: 200px 27px;
+color: white;}
+.container{
+    margin-top: -4em;
+    height: fit-content;
+}
+.container h2{
+    font-size: 50px;
+}
+.container a{
+
+    font-size: 20px;
+    padding: 0;
+}
+.title-styletag{
+    width: 90%;
+    height: fit-content;
+}
+.style-tag img{
+    width: 160px;
+}
+.container_2{
+    flex-direction: column;
+}
+.container_2_cast{
+ 
+    width: 90%;
+}
+.container_2_cast img{
+    width: 160px;
+}
+.container_2_trailer{
+    width: 90%;
+    justify-content: start;
+    align-items: center;
+}
+.container_2_trailer iframe{
+    margin-left: 8em;
+    width: 300px;
+}
+.title-styletag h2{
+    font-size: 35px;
+}
+.trailer_title h3{
+    font-size: 35px;
+}
+.container_search{
+    margin-top: 14em;
+    display: flex;
+    justify-content: space-around;
+}
+.search-page{
+    width: 90%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+.search-page p {
+    font-size: 12px;
+}
+.search-page img{
+    width: 120px;
+}
+.home-btn{
+    padding: 20px;
+}
+
+
+}
