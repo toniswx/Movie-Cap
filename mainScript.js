@@ -580,8 +580,10 @@ const app = {
      const list_container = document.getElementById("list-similar")
      list_container.innerHTML = ""
      const ul = document.createElement("ul")
+
+
      similar.results.forEach(element => {
-      if(element.name !== null){
+      if(element.name !== undefined){
         ul.innerHTML +=`<li data-id="${element.id}" data-type="tv"  data-el="${element.id}">
         <a href="page-two.html">
         <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
@@ -589,7 +591,9 @@ const app = {
        </a>
          </li>`    
       }
-      else{
+
+
+      if(element.title !== undefined){
         ul.innerHTML +=`<li data-id="${element.id}" data-type="movie"  data-el="${element.id}">
         <a href="page-two.html">
         <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
