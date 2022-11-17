@@ -193,7 +193,7 @@ const app = {
       else if(result.name === undefined){
         page.innerHTML +=`     
         <div data-id="${result.id}" data-type="${localStorage.getItem(`type`)}" class="teste">
-         <a href="page-two.html" target="_blank">
+         <a href="page-two.html">
          <img src="https://image.tmdb.org/t/p/w400/${result.poster_path}" 
         width="200px" data-el="${result.id}" >
         <p>${result.title}</p>
@@ -204,7 +204,7 @@ const app = {
       else{
         page.innerHTML +=  `     
         <div data-id="${result.id}" data-type="${localStorage.getItem(`type`)}" class="teste">
-         <a href="page-two.html" target="_blank">
+         <a href="page-two.html">
          <img src="https://image.tmdb.org/t/p/w400/${result.poster_path}" 
         width="200px" data-el="${result.id}" >
         <p>${result.name}</p>
@@ -293,7 +293,7 @@ const app = {
 
      post.results.forEach(element => {
         ul.innerHTML +=`<li data-id="${element.id}" data-type="tv">
-        <a href="page-two.html" target="_blank">
+        <a href="page-two.html">
         <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
        width="200px" data-el="${element.id}" >
        </a>
@@ -335,7 +335,7 @@ const app = {
      const ul = document.createElement("ul")
      post.results.forEach(element => {
         ul.innerHTML +=`<li data-id="${element.id}" data-type="movie">
-        <a href="page-two.html" target="_blank">
+        <a href="page-two.html">
         <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
        width="200px" data-el="${element.id}" >
        </a>
@@ -380,7 +380,7 @@ const app = {
     list_container.innerHTML = ""
     movie.results.forEach(element => {
        ul.innerHTML +=`<li data-id="${element.id}" data-type="movie">
-       <a href="page-two.html" target="_blank">
+       <a href="page-two.html">
        <img src="https://image.tmdb.org/t/p/w400/${element.poster_path}" 
       width="200px" data-el="${element.id}" >
       </a>
