@@ -48,18 +48,28 @@ const app = {
     const keyBoard = document.querySelector(".keyboard")
     let search = document.getElementById("searinput")
     let type = document.getElementById("select")
-    
+
+
+
+
+
     
  
 
     keyBoard.addEventListener("keydown" , e =>{
           if(e.keyCode === 13){
-           localStorage.setItem(`search`,`${search.value}`)
-           localStorage.setItem(`type`,`${type.value}`)
+           localStorage.setItem(`search`,`${search.value}`)  
+           localStorage.setItem(`type`,`${type.value}`) 
             window.location = "page-3.html"
             
           }
     })
+  
+    type.value = localStorage.getItem(`type`)
+    search.value = localStorage.getItem(`search`)
+
+
+
 
    }
    ,
@@ -182,7 +192,7 @@ const app = {
       }
       else if(result.name === undefined){
         page.innerHTML +=`     
-        <div data-id="${result.id}" data-type="movie" class="teste">
+        <div data-id="${result.id}" data-type="${localStorage.getItem(`type`)}" class="teste">
          <a href="page-two.html" target="_blank">
          <img src="https://image.tmdb.org/t/p/w400/${result.poster_path}" 
         width="200px" data-el="${result.id}" >
@@ -193,7 +203,7 @@ const app = {
       }
       else{
         page.innerHTML +=  `     
-        <div data-id="${result.id}" data-type="movie" class="teste">
+        <div data-id="${result.id}" data-type="${localStorage.getItem(`type`)}" class="teste">
          <a href="page-two.html" target="_blank">
          <img src="https://image.tmdb.org/t/p/w400/${result.poster_path}" 
         width="200px" data-el="${result.id}" >
@@ -231,6 +241,8 @@ const app = {
    },
 
    getSelectedMovie : () =>{
+
+
     let newUrl = `https://api.themoviedb.org/3/${localStorage.getItem("type")}/${localStorage.getItem("id")}?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US `
     let req = new Request(newUrl,{
         method:"GET",
@@ -412,7 +424,7 @@ const app = {
    overview.innerHTML = movies.results[index].overview
    poster.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].poster_path}" >`
    background.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].backdrop_path}" >`
-   see_more.innerHTML = `<a href="page-two.html"  class="btn-see-more" data-id=${movies.results[index].id} data-type="movie" > See more </a>`
+   see_more.innerHTML = `<a   class="btn-see-more" data-id=${movies.results[index].id} data-type="movie" > See more </a>`
 
 
 
@@ -431,7 +443,7 @@ const app = {
     overview.innerHTML = movies.results[index].overview
     poster.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].poster_path}" >`
     background.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].backdrop_path}" >`
-    see_more.innerHTML = `<a href="page-two.html"  class="btn-see-more" data-id=${movies.results[index].id} data-type="movie" > See more </a>`
+    see_more.innerHTML = `<a   class="btn-see-more" data-id=${movies.results[index].id} data-type="movie" > See more </a>`
   })
 
 
@@ -441,8 +453,7 @@ const app = {
       if(index < 0){
         index = length     
       }
-      see_more.innerHTML = `<a href="page-two.html"  class="btn-see-more" data-id=${movies.results[index].id} data-type="movie" > See more </a>`
-
+      see_more.innerHTML = `<a   class="btn-see-more" data-id=${movies.results[index].id} data-type="movie" > See more </a>`
      title.innerHTML = movies.results[index].title
      release.innerHTML = movies.results[index].release_date
   
@@ -456,17 +467,17 @@ const app = {
 
       
 
+  let btnd = document.querySelector(".see_more")
+  
+  btnd.addEventListener("click",()=>{
     
- let btnd = document.querySelectorAll(".btn-see-more")
- 
- btnd.forEach(btn =>{
-  btn.addEventListener("click",()=>{
-    
-    localStorage.setItem(`id`,`${btnd.dataset.id}`)
-    localStorage.setItem(`type`,`${btnd.dataset.type}`)
+   console.log(btnd.children.item(0).dataset.id)
         
+   localStorage.setItem(`id`,`${btnd.children.item(0).dataset.id}`)
+   localStorage.setItem(`type`,`${btnd.children.item(0).dataset.type}`)
+   window.location = "page-two.html"
   })
- })
+
  
 
 
