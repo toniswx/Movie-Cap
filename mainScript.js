@@ -22,6 +22,7 @@ const app = {
                 app.getDiscoverData()
                 app.getLatest()
                 app.pagination()
+               
                break
             case "page-2" : 
 
@@ -388,11 +389,16 @@ const app = {
 
 
    latest : (movies) =>{
+    console.log(movies)
    const poster = document.querySelector(".poster")
    const title = document.querySelector(".title_movie")
    const overview = document.querySelector(".overview_info")
    const background = document.querySelector(".background")
    const release = document.querySelector(".release_date_info")
+   const see_more = document.querySelector(".see_more")
+
+ 
+
 
 
 
@@ -406,6 +412,7 @@ const app = {
    overview.innerHTML = movies.results[index].overview
    poster.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].poster_path}" >`
    background.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].backdrop_path}" >`
+   see_more.innerHTML = `<a href="page-two.html"  class="btn-see-more" data-id=${movies.results[index].id} data-type="movie" > See more </a>`
 
 
 
@@ -418,13 +425,13 @@ const app = {
     if(index > length){
       index = 0
     }
+   
     title.innerHTML = movies.results[index].title
     release.innerHTML = movies.results[index].release_date
     overview.innerHTML = movies.results[index].overview
     poster.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].poster_path}" >`
     background.innerHTML = `<img src="https://image.tmdb.org/t/p/original/${movies.results[index].backdrop_path}" >`
-
-
+    see_more.innerHTML = `<a href="page-two.html"  class="btn-see-more" data-id=${movies.results[index].id} data-type="movie" > See more </a>`
   })
 
 
@@ -434,6 +441,8 @@ const app = {
       if(index < 0){
         index = length     
       }
+      see_more.innerHTML = `<a href="page-two.html"  class="btn-see-more" data-id=${movies.results[index].id} data-type="movie" > See more </a>`
+
      title.innerHTML = movies.results[index].title
      release.innerHTML = movies.results[index].release_date
   
@@ -444,10 +453,30 @@ const app = {
      
     })  
 
+
+      
+
+    
+ let btnd = document.querySelectorAll(".btn-see-more")
+ 
+ btnd.forEach(btn =>{
+  btn.addEventListener("click",()=>{
+    
+    localStorage.setItem(`id`,`${btnd.dataset.id}`)
+    localStorage.setItem(`type`,`${btnd.dataset.type}`)
+        
+  })
+ })
+ 
+
+
+
    },
     
    showInfo : (info) =>{
     console.log(info)
+
+
     const poster = document.querySelector(".poster")
     const title = document.querySelector(".title_movie")
     const overview = document.querySelector(".overview_info")
@@ -460,6 +489,7 @@ const app = {
     const label = document.querySelector(".straming")
 
 
+        
 
     //TAKE ALL GENRES 
     info.genres.forEach(genre =>{
