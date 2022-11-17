@@ -29,7 +29,17 @@ const app = {
            app.getCredits()
            app.getImages()
            app.getSimilarMovies()
+           app.searchInput()
+           app.search()
+
                 break     
+            case "page-3" :
+              
+            app.pagination()
+            app.searchInput()
+            app.search()
+            break
+
          }      
    },
   
@@ -37,42 +47,39 @@ const app = {
     const keyBoard = document.querySelector(".keyboard")
     let search = document.getElementById("searinput")
     let type = document.getElementById("select")
+    
+    
+ 
 
     keyBoard.addEventListener("keydown" , e =>{
           if(e.keyCode === 13){
-            app.search(type.value,search.value)
+           localStorage.setItem(`search`,`${search.value}`)
+           localStorage.setItem(`type`,`${type.value}`)
+            window.location = "page-3.html"
+            
           }
     })
 
    }
    ,
-   search : (type,search) =>{
   
-    let newURL = `https://api.themoviedb.org/3/search/${type}?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&query=${search}&page=1&include_adult=true
-    `
-       let req = new Request(newURL,{
-        method:"GET",
-        mode:"cors"
-    })
-    fetch(req)
-    .then(resp => resp.json())
-    .then(app.searchValue)
-   },
-   searchValue : (value) =>{
-          console.log(value)
-   },
+
    pagination : () =>{
     
     let page = 1
 
 
      document.querySelectorAll(".esq").forEach(btn =>{
+
       btn.addEventListener("click",() =>{
+        
        page = page - 1
-      
+       console.log(page)
       if(page < 1)
        {return}
-      
+
+       
+
         if(btn.dataset.container === "show"){
           app.getMostPopularSeries(page)
         }
@@ -82,18 +89,23 @@ const app = {
         if(btn.dataset.container === "discover"){
           app.getDiscoverData(page)
         }
-        console.log(page)
+        app.search(page)
+        
       })
     })
 
     
      document.querySelectorAll(".dir").forEach(btn =>{
+      console.log(btn)
       btn.addEventListener("click",() =>{
        page = page + 1
-      
+       console.log(page)
       if(page > 10)
        {page = 1 }
       
+      
+
+
         if(btn.dataset.container === "show"){
           app.getMostPopularSeries(page)
         }
@@ -103,13 +115,28 @@ const app = {
         if(btn.dataset.container === "discover"){
           app.getDiscoverData(page)
         }
-        console.log(page)
+        app.search(page)
       
+       
       
      
       })
     })
 
+   },
+   search : (pages) =>{
+    document.querySelector(".result").innerHTML = `Results for:  ${localStorage.getItem(`search`)}`
+
+    let newURL = `https://api.themoviedb.org/3/search/${localStorage.getItem(`type`)}?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&query=${localStorage.getItem(`search`)}&page=${pages}&include_adult=false
+    `
+    console.log(newURL)
+       let req = new Request(newURL,{
+        method:"GET",
+        mode:"cors"
+    })
+     fetch(req)
+    .then(resp => resp.json())
+    .then(app.searchValue)
    },
 
    getLatest : () =>{
@@ -136,32 +163,60 @@ const app = {
       
    },
    searchValue : (search) =>{
-    
+     
+    console.log(search)
+
+
     const page = document.querySelector(".search-page")
+    const pagep = document.querySelector(".page")
+    pagep.innerHTML = `Page ${search.page} of ${search.total_pages}`
+
+
+
     page.innerHTML = ""
     search.results.forEach(result =>{
 
       if(result.poster_path === null){
         return
       }
-      else{
-      page.innerHTML += `     
-      <div data-id="${result.id}" data-type="movie" class"teste">
-       <a href="page-two.html" target="_blank">
-       <img src="https://image.tmdb.org/t/p/w400/${result.poster_path}" 
-      width="200px" data-el="${result.id}" >
-      <p>${result.title}</p>
-      </a>
-        </div>  
-      
+      else if(result.name === undefined){
+        page.innerHTML +=`     
+        <div data-id="${result.id}" data-type="movie" class="teste">
+         <a href="page-two.html" target="_blank">
+         <img src="https://image.tmdb.org/t/p/w400/${result.poster_path}" 
+        width="200px" data-el="${result.id}" >
+        <p>${result.title}</p>
+        </a>
+          </div>  
       `
       }
+      else{
+        page.innerHTML +=  `     
+        <div data-id="${result.id}" data-type="movie" class="teste">
+         <a href="page-two.html" target="_blank">
+         <img src="https://image.tmdb.org/t/p/w400/${result.poster_path}" 
+        width="200px" data-el="${result.id}" >
+        <p>${result.name}</p>
+        </a>
+          </div>  
+      `
+     
+      }
+     
+      const els = document.querySelectorAll("[data-id]")
+      els.forEach(el =>{
+         el.addEventListener("click",()=>{
+          localStorage.setItem(`id`,`${el.dataset.id}`)
+          localStorage.setItem(`type`,`${el.dataset.type}`)
+          
+         })})
     })
   
 
    }
    ,
    getMostPopularSeries : (page) =>{
+    
         let newUrl = `
         https://api.themoviedb.org/3/tv/popular?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&page=${page}
         `

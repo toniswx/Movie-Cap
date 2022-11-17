@@ -85,10 +85,7 @@ body,html{
 .links optgroup{
     padding-inline-start: 20px;
 }
-.links a:hover{
-    z-index:300;
-    color: #E94560;
-}
+
 .logo{ 
     color: white;
     font-size: 40px;
@@ -415,37 +412,70 @@ justify-content: space-around;
 .trailer iframe{
     padding-inline-end: 10em;
 }
-
-
-
-
-
-
-
-
+.container_search{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150vh;
+ }
 .search-page{
+    width: 90%;
+    
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    z-index: 10000;
-    width: 100vw;
-    min-height: 100vh;
-    position: absolute;
-    background-color: white;
-    top: 150;
+grid-template-columns: repeat(8, 1fr);
+grid-template-rows: repeat(2, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
 }
-li::marker {
-    unicode-bidi: none;
-    font-variant-numeric: none;
-    text-transform: none;
-    text-indent: 0px ;
-    text-align: start ;
-    text-align-last: end ;
+.home-btn{
+    border-radius: 10px;
+    color: white;
+    margin-left: 1em;
+    text-decoration: none;
+    background-color: #E94560;
+  padding: 15px 50px;
 }
-.teste li{
+.result{
+    color: white;
+    font-size: 40px;
+        font-family: 'Barlow Condensed', sans-serif;
 
-    marker: none;
-    list-style: none;
 }
+.teste{
+    
+    transition: all .45s ease;
+}
+.teste a{
+    font-size: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+   color: white;
+    text-decoration: none;
+}
+.teste a:hover{
+    background-color: rgb(52, 7, 112);
+}
+.page{
+    border-left: 10px solid #E94560;
+
+    font-family: 'Barlow Condensed', sans-serif;
+     font-size: 20px;
+    color: white;
+}
+.pagination_container{
+    width: 100%;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+}
+#nav-search{
+    background-color: #E94560;
+    padding: 15px 60px;
+    text-decoration: none;
+    color: white;
+}
+
+
+
