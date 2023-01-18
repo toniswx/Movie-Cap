@@ -548,7 +548,6 @@ grid-row-gap: 0px;
  }
  .home{
 
-    height: 124vh;
  }
  .poster{
     width: 100%;
@@ -658,6 +657,14 @@ color: white;}
 }
 .home-btn{
     padding: 20px;
+}
+.a1{
+    font-size: .5em;
+}
+.container_1{
+    margin-top: 15em;
+    width: 100%;
+    height: auto;
 }
 body,html{
    
