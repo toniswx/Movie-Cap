@@ -267,6 +267,12 @@ display: flex;
     font-size: 30px;
     border-bottom: 5px solid #E94560;
 }
+.container{
+    margin-top: 2em;
+}
+.container_2{
+    margin-top: 20em;
+}
 .genres-container p{
     color:#E94560;
     font-size: 20px;
@@ -546,9 +552,7 @@ grid-row-gap: 0px;
     justify-content: center;
   
  }
- .home{
-
- }
+ 
  .poster{
     width: 100%;
     align-items: center;
