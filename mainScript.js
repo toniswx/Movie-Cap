@@ -57,6 +57,7 @@ const app = {
   pagination: () => {
     let page = 1;
 
+    app.search(page);
     document.querySelectorAll(".esq").forEach((btn) => {
       btn.addEventListener("click", () => {
         page = page - 1;
@@ -101,24 +102,48 @@ const app = {
     });
   },
   search: (pages) => {
-    document.querySelector(
-      ".result"
-    ).innerHTML = `Results for:  ${localStorage.getItem(`search`)}`;
+    let page = pages;
 
-    let newURL = `https://api.themoviedb.org/3/search/${localStorage.getItem(
-      `type`
-    )}?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&query=${localStorage.getItem(
-      `search`
-    )}&page=${pages}&include_adult=false
+    if (page === undefined) {
+      page = 1;
+      document.querySelector(
+        ".result"
+      ).innerHTML = `Results for:  ${localStorage.getItem(`search`)}`;
+
+      let newURL = `https://api.themoviedb.org/3/search/${localStorage.getItem(
+        `type`
+      )}?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&query=${localStorage.getItem(
+        `search`
+      )}&page=${page}&include_adult=false
     `;
-    console.log(newURL);
-    let req = new Request(newURL, {
-      method: "GET",
-      mode: "cors",
-    });
-    fetch(req)
-      .then((resp) => resp.json())
-      .then(app.searchValue);
+      console.log(newURL);
+      let req = new Request(newURL, {
+        method: "GET",
+        mode: "cors",
+      });
+      fetch(req)
+        .then((resp) => resp.json())
+        .then(app.searchValue);
+    } else {
+      document.querySelector(
+        ".result"
+      ).innerHTML = `Results for:  ${localStorage.getItem(`search`)}`;
+
+      let newURL = `https://api.themoviedb.org/3/search/${localStorage.getItem(
+        `type`
+      )}?api_key=9c21b916909f5afdb748670f51f947e4&language=en-US&query=${localStorage.getItem(
+        `search`
+      )}&page=${pages}&include_adult=false
+    `;
+      console.log(newURL);
+      let req = new Request(newURL, {
+        method: "GET",
+        mode: "cors",
+      });
+      fetch(req)
+        .then((resp) => resp.json())
+        .then(app.searchValue);
+    }
   },
 
   getLatest: () => {
